@@ -1,4 +1,4 @@
-import { CarItemSpecification, CarItemTextSpecification } from "../../components/CarItemSpecification";
+import { CarItemSpecification, CarItemTextSpecification } from "../../../components/CarItemSpecification";
 import { FiTool, FiClock, FiMapPin, FiArrowLeft } from 'react-icons/fi';
 import Image from 'next/image';
 import Link from 'next/link';
