@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { getById, getTop10, ICar } from "../../../services/data";
 import { GetStaticProps, InferGetStaticPropsType } from "next";
+import { useRouter } from "next/router";
 
 
 
@@ -53,6 +54,12 @@ export const getStaticProps: GetStaticProps<Props> = async (context) => {
 type DetailProps = InferGetStaticPropsType<typeof getStaticProps>;
 
 const Detail = ({ car }: DetailProps) => {
+    const router = useRouter();
+
+    if (router.isFallback) {
+        return <h2>Loading...</h2>
+    }
+    
     return (
         <div className="w-full flex justify-center bg-gray-100 min-h-screen">
             <div className="flex flex-col w-full m-4 md:w-2/3 xl:1/2">
@@ -69,9 +76,9 @@ const Detail = ({ car }: DetailProps) => {
                     <div className="w-full h-96 relative">
                         <Image src={car.image} alt={car.make} layout="fill" className="rounded" objectFit="cover" />
                     </div>
-                        <p className="text-gray-800 pt-3 text-lg">
-                            {car.make} {car.model}
-                        </p>
+                    <p className="text-gray-800 pt-3 text-lg">
+                        {car.make} {car.model}
+                    </p>
                     <p className="font-bold text-gray-800 py-3 text-lg">
                         {Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(car.price)}
                     </p>
